@@ -1,17 +1,17 @@
 import Medicamento from "../models/MedicamentoModel.js";
 
 class MedicamentoController {
-    // Obtener todos (incluye los dos métodos de filtrado requeridos: por nombre y por venta bajo receta)
+    // Esto son los métodos del controlador para manejar las operaciones CRUD de los medicamentos. Cada método maneja una solicitud HTTP específica y responde con un JSON que indica el resultado de la operación.
     async getAll(req, res) {
         try {
             const { nombre, bajoReceta } = req.query;
             let filtro = {};
             
-            // Filtro 1: Búsqueda por nombre (coincidencia parcial)
+            // Filtro 1: Búsqueda por nombre, usando una expresión regular para permitir coincidencias parciales y sin importar mayúsculas o minúsculas.
             if (nombre) {
                 filtro.nombre = { $regex: nombre, $options: 'i' }; 
             }
-            // Filtro 2: Búsqueda por medicamentos bajo receta
+            // Filtro 2: Búsqueda por medicamentos bajo receta, si el parámetro bajoReceta está presente en la consulta, se filtra por el valor booleano correspondiente.
             if (bajoReceta) {
                 filtro.ventaBajoReceta = bajoReceta === 'true';
             }
@@ -23,7 +23,7 @@ class MedicamentoController {
         }
     }
 
-    // Obtener por ID
+    // Obtener por ID, este método busca un medicamento específico en la base de datos utilizando su ID. Si el medicamento no se encuentra, devuelve un error 404.
     async getById(req, res) {
         try {
             const id = req.params.id;
@@ -37,7 +37,7 @@ class MedicamentoController {
         }
     }
 
-    // Crear
+    // Crear, este método permite agregar un nuevo medicamento a la base de datos. Valida que todos los campos obligatorios estén presentes antes de crear el registro. Si falta algún dato, devuelve un error 400.
     async create(req, res) {
         try {
             const { nombre, droga, precio, stock, ventaBajoReceta } = req.body;
@@ -51,7 +51,7 @@ class MedicamentoController {
         }
     }
 
-    // Actualizar
+    // Actualizar, este método permite modificar los datos de un medicamento existente. Busca el medicamento por su ID y actualiza los campos proporcionados en la solicitud. Si el medicamento no se encuentra, devuelve un error 404.
     async update(req, res) {
         try {
             const id = req.params.id;
@@ -72,7 +72,7 @@ class MedicamentoController {
         }
     }
 
-    // Eliminar
+    // Eliminar, este método permite eliminar un medicamento de la base de datos utilizando su ID. Si el medicamento no se encuentra, devuelve un error 404.    
     async delete(req, res) {
         try {
             const id = req.params.id;

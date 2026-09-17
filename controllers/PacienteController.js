@@ -11,7 +11,7 @@ class PacienteController {
         }
     }
 
-    // Crear un paciente
+    // Crear un paciente, este método permite agregar un nuevo paciente a la base de datos. Valida que todos los campos obligatorios estén presentes antes de crear el registro. Si falta algún dato, devuelve un error 400.
     async create(req, res) {
         try {
             const { nombre, dni, obraSocial, telefono } = req.body;
