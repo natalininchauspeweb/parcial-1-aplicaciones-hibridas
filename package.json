@@ -1,16 +1,20 @@
 {
   "name": "parcial-1-aplicaciones-hibridas",
   "version": "1.0.0",
-  "description": "",
+  "description": "app farmacia",
   "main": "index.js",
-  "type": "module",
   "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+
   "keywords": [],
-  "author": "",
+  "author": "Natalin Inchauspe",
   "license": "ISC",
+  "type": "module",
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "mongoose": "^9.10.1"
